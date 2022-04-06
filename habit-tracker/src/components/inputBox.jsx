@@ -35,6 +35,7 @@ const InputBox = ({addHabit}) => {
         if(e.key ==='Enter') addTracker();
     }
     const addTracker =(e) =>{
+        if(!inputRef.current.value) return;
         addHabit(value);
         inputRef.current.value = ''
         inputRef.current.focus();
