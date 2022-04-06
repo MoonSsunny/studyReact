@@ -1,5 +1,15 @@
 import React, {useState} from 'react';
 import Habit from './habit';
+import styled from 'styled-components';
+import InputBox from './inputBox';
+import Navbar from './navbar';
+import Button from './button';
+
+const StyledUl = styled.ul`
+  width: 1000px;
+  margin: 0 auto;
+  padding: 30px;
+`
 
 const Habits = () => {
   const initHabits = [
@@ -8,11 +18,13 @@ const Habits = () => {
     {id:3, name: 'Coding', count:0},
   ]
   const [habits, setHabits] = useState(initHabits);
+  const [totalHabit, setTotalHabit] = useState(0);
   const handleIncrement = (habit) => {
     const updateHabit = [...habits];
     const index = updateHabit.indexOf(habit);
     updateHabit[index].count++;
     setHabits(updateHabit);
+    setTotalHabit((totalHabit) => totalHabit + 1);
   }
   const handleDecrease = (habit) => {
     const updateHabit = [...habits];
@@ -20,6 +32,7 @@ const Habits = () => {
     if(updateHabit[index].count <= 0 ) return 0;
     updateHabit[index].count--;
     setHabits(updateHabit);
+    setTotalHabit((totalHabit) => totalHabit - 1);
   }
   const handleDelete = (habit) => {
     const updateHabit = [...habits];
@@ -27,12 +40,25 @@ const Habits = () => {
     updateHabit.splice(index,1);
     setHabits(updateHabit);
   }
+  const changeCount = () => {
+    const changeHabit = [...habits];
+    changeHabit.forEach((item)=>{
+      item.count = 0;
+    })
+    setHabits(changeHabit);
+    setTotalHabit(0);
+  }
   return (
-    <ul>
+    <>
+    <Navbar totalHabit={totalHabit}/>
+    <InputBox/>
+    <StyledUl>
       {habits.map((item) => ( 
         <Habit habit={item} key={item.id} onIncrement={handleIncrement} onDecrement={handleDecrease} onDelete={handleDelete}/>
       ))}
-    </ul>
+    </StyledUl>
+    <Button changeCount={changeCount}/>
+    </>
   );
 };
 
