@@ -43,7 +43,6 @@ const Habits = () => {
     let value = 0;
     updateHabit.forEach(item => {
       value += item.count;
-      console.log(value);
     });
     setHabits(updateHabit);
     setTotalHabit(value);
