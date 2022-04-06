@@ -1,24 +1,28 @@
 import React , {useState} from 'react';
 
-const Habit = () => {
-  const [count , setCount] = useState(0);
+const Habit = ({habit,onDecrement,onIncrement,onDelete}) => {
+  const {name, count} = habit;
   const handleIncrement = () => {
-    setCount((count) => count + 1);
+    onIncrement(habit);
   }
-  const handleDecrease = () => {
-    setCount((count) => count <= 0 ? 0 : count - 1);
+  const handleDecrement = () => {
+    onDecrement(habit);
   }
-  return (
+  const handleDelete =() =>{
+    onDelete(habit);
+  }
+  return ( 
     <li className='habit'>
-    <span className='habit-name'>Reading</span>
+    <span className='habit-name'>{name}</span>
     <span className='habit-count'>{count}</span>
+  
     <button className='habit-button habit-increase' onClick={handleIncrement}>
       <i className="fas fa-plus-square"></i>
     </button>
-    <button className='habit-button habit-decrease' onClick={handleDecrease}>
+    <button className='habit-button habit-decrease' onClick={handleDecrement}>
       <i className="fas fa-minus-square"></i>
     </button>
-    <button className='habit-button habit-delete'>
+    <button className='habit-button habit-delete' onClick={handleDelete}>
       <i className="fas fa-trash"></i>
     </button>
     </li>
