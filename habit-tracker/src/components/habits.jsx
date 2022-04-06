@@ -19,6 +19,8 @@ const Habits = () => {
   ]
   const [habits, setHabits] = useState(initHabits);
   const [totalHabit, setTotalHabit] = useState(0);
+
+
   const handleIncrement = (habit) => {
     const updateHabit = [...habits];
     const index = updateHabit.indexOf(habit);
@@ -38,7 +40,13 @@ const Habits = () => {
     const updateHabit = [...habits];
     const index = updateHabit.indexOf(habit);
     updateHabit.splice(index,1);
+    let value = 0;
+    updateHabit.forEach(item => {
+      value += item.count;
+      console.log(value);
+    });
     setHabits(updateHabit);
+    setTotalHabit(value);
   }
   const changeCount = () => {
     const changeHabit = [...habits];
@@ -48,10 +56,21 @@ const Habits = () => {
     setHabits(changeHabit);
     setTotalHabit(0);
   }
+
+  const addHabit = (item) => {
+    const add = [...habits];
+    add.push({
+      id: add.length +1,
+      name: item,
+      count: 0,
+    })
+    setHabits(add);
+  }
+
   return (
     <>
     <Navbar totalHabit={totalHabit}/>
-    <InputBox/>
+    <InputBox addHabit={addHabit}/>
     <StyledUl>
       {habits.map((item) => ( 
         <Habit habit={item} key={item.id} onIncrement={handleIncrement} onDecrement={handleDecrease} onDelete={handleDelete}/>

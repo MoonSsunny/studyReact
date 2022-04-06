@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useRef, useState} from 'react';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
@@ -25,11 +25,24 @@ const StyledDiv = styled.div`
     }
 `
 
-const InputBox = () => {
+const InputBox = ({addHabit}) => {
+    const [value , setValue] = useState('')
+    const inputRef = useRef();
+    const handleChange = (e)=>{
+        setValue(e.target.value);
+    }
+    const onKeyup = (e) =>{
+        if(e.key ==='Enter') addTracker();
+    }
+    const addTracker =(e) =>{
+        addHabit(value);
+        inputRef.current.value = ''
+        inputRef.current.focus();
+    }
     return (
         <StyledDiv>
-            <input type="text" className='textBox' placeholder='입력해주세요'/>
-            <button type='button' className='addBtn'>ADD</button>
+            <input type="text" className='textBox' placeholder='입력해주세요' onChange={handleChange} ref={inputRef} onKeyUp={onKeyup}/>
+            <button type='button' className='addBtn' onClick={addTracker}>ADD</button>
         </StyledDiv>
     );
 };
