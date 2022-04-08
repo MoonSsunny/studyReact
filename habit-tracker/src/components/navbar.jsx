@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLeaf } from "@fortawesome/free-solid-svg-icons";
@@ -29,7 +29,7 @@ const StyledDiv = styled.div`
     }
 `
 
-const Navbar = ({totalHabit}) => {
+const Navbar = memo( ({totalHabit}) => {
     return (
     <StyledDiv>
     <FontAwesomeIcon icon={faLeaf} className="icon" />
@@ -37,6 +37,6 @@ const Navbar = ({totalHabit}) => {
     <span>{totalHabit}</span>
     </StyledDiv>
 );
-};
+})
 
 export default Navbar;

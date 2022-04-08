@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import Habit from './habit';
 import styled from 'styled-components';
 import InputBox from './inputBox';
@@ -21,22 +21,22 @@ const Habits = () => {
   const [totalHabit, setTotalHabit] = useState(0);
 
 
-  const handleIncrement = (habit) => {
+  const handleIncrement = useCallback((habit) => {
     const updateHabit = [...habits];
     const index = updateHabit.indexOf(habit);
     updateHabit[index].count++;
     setHabits(updateHabit);
     setTotalHabit((totalHabit) => totalHabit + 1);
-  }
-  const handleDecrease = (habit) => {
+  })
+  const handleDecrease = useCallback((habit) => {
     const updateHabit = [...habits];
     const index = updateHabit.indexOf(habit);
     if(updateHabit[index].count <= 0 ) return 0;
     updateHabit[index].count--;
     setHabits(updateHabit);
     setTotalHabit((totalHabit) => totalHabit - 1);
-  }
-  const handleDelete = (habit) => {
+  })
+  const handleDelete = useCallback((habit) => {
     const updateHabit = [...habits];
     const index = updateHabit.indexOf(habit);
     updateHabit.splice(index,1);
@@ -46,17 +46,17 @@ const Habits = () => {
     });
     setHabits(updateHabit);
     setTotalHabit(value);
-  }
-  const changeCount = () => {
+  })
+  const changeCount = useCallback(() => {
     const changeHabit = [...habits];
     changeHabit.forEach((item)=>{
       item.count = 0;
     })
     setHabits(changeHabit);
     setTotalHabit(0);
-  }
+  })
 
-  const addHabit = (item) => {
+  const addHabit = useCallback((item) => {
     const add = [...habits];
     add.push({
       id: add.length +1,
@@ -64,7 +64,7 @@ const Habits = () => {
       count: 0,
     })
     setHabits(add);
-  }
+  })
 
   return (
     <>

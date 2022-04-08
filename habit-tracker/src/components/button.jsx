@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
@@ -16,12 +16,12 @@ const StyledButton = styled.button`
   margin: 0 auto;
 `
 
-const Button = ({changeCount}) => {
+const Button = memo(({changeCount}) => {
   return (
     <StyledDiv>
     <StyledButton onClick={changeCount}>Reset All</StyledButton>
     </StyledDiv>
   );
-};
+});
 
 export default Button;

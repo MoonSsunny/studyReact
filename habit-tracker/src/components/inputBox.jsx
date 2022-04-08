@@ -1,4 +1,4 @@
-import React,{useRef, useState} from 'react';
+import React,{memo, useRef, useState} from 'react';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
@@ -25,7 +25,7 @@ const StyledDiv = styled.div`
     }
 `
 
-const InputBox = ({addHabit}) => {
+const InputBox =memo( ({addHabit}) => {
     const [value , setValue] = useState('')
     const inputRef = useRef();
     const handleChange = (e)=>{
@@ -46,6 +46,6 @@ const InputBox = ({addHabit}) => {
             <button type='button' className='addBtn' onClick={addTracker}>ADD</button>
         </StyledDiv>
     );
-};
+})
 
 export default InputBox;
